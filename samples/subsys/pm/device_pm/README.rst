@@ -1,6 +1,10 @@
+.. _device-pm-sample:
+
+:orphan:
+
 .. zephyr:code-sample:: device_pm
    :name: Device Idle Power Management
-   :relevant-api: pm_device pm_device_runtime
+   :relevant-api: subsys_pm_device subsys_pm_device_runtime
 
    Demonstrate device power management with a parent-child device hierarchy.
 
