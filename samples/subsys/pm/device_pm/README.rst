@@ -28,7 +28,7 @@ The application performs the following sequence:
 This sample shows how to:
 
 * Define PM-enabled devices using :c:macro:`PM_DEVICE_DEFINE`.
-* Use :c:func:`pm_device_runtime_enable` to enable runtime PM for a device.
+* Use :c:func:`pm_device_driver_init` to initialize PM for a device.
 * Manage device power state with :c:func:`pm_device_runtime_get` and
   :c:func:`pm_device_runtime_put`.
 * Query a device's power state using :c:func:`pm_device_state_get`.
@@ -61,21 +61,16 @@ console:
 
 .. code-block:: console
 
-   parent suspending..
-   child suspending..
-   *** Booting Zephyr OS build zephyr-vX.Y.Z ***
-   Device PM sample app start
    parent resuming..
    child resuming..
+   *** Booting Zephyr OS build zephyr-vX.Y.Z ***
+   Device PM sample app start
    Dummy device resumed
-   child suspending..
-   parent suspending..
    Device PM sample app complete
 
-The initial ``parent suspending..`` and ``child suspending..`` messages appear
-because both devices start in an active state and are immediately suspended
-when runtime PM is enabled during device initialization. The application then
-resumes them, performs I/O, and suspends them again upon closing.
+The ``parent resuming..`` and ``child resuming..`` messages appear because
+the devices are initialized using :c:func:`pm_device_driver_init` during boot.
+The application then resumes the child, performs I/O, and closes it.
 
 Exit QEMU by pressing :kbd:`CTRL+A` :kbd:`x`.
 
