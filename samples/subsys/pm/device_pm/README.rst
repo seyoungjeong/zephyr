@@ -61,16 +61,19 @@ console:
 
 .. code-block:: console
 
-   parent resuming..
-   child resuming..
    *** Booting Zephyr OS build zephyr-vX.Y.Z ***
    Device PM sample app start
+   parent resuming..
+   child resuming..
    Dummy device resumed
+   child suspending..
+   parent suspending..
    Device PM sample app complete
 
-The ``parent resuming..`` and ``child resuming..`` messages appear because
-the devices are initialized using :c:func:`pm_device_driver_init` during boot.
-The application then resumes the child, performs I/O, and closes it.
+Devices are initialized in a suspended state using
+:c:func:`pm_device_driver_init`. When the application opens the child device,
+both the parent and child are resumed. After performing I/O, the application
+closes the device, which suspends both the child and parent.
 
 Exit QEMU by pressing :kbd:`CTRL+A` :kbd:`x`.
 
